@@ -8,7 +8,7 @@ class Kindergarden {
         console.log(`"${this.name}" can accept ${this.kidCount} kids.`);
     }
     updateKidsLimit(newCount) {
-        if (this.kidList.length > newCount) {
+        if (this.kidList.length > this.kidCount) {
             console.log(`"${this.name}" can not update kids limit right now.`);
             return;
         } else {
@@ -32,17 +32,28 @@ class Kindergarden {
         for (let i = 0; i < this.kidList.length; i++) {
             const kidName = this.kidList[i];
 
-            if (kidName === this.kidList[this.kidList.length - 1]) {
-                kidNameList += `and ${kidName}.`;
+            if (kidName === this.kidList[this.kidList.length - 2]) {
+                kidNameList += `${this.kidList[this.kidList.length - 2]} and ${this.kidList[this.kidList.length - 1]}`;
                 break;
             } else {
-                kidNameList += kidName + ', ';
+                kidNameList += this.kidList.length === 1 ? kidName : kidName + ', ';
             }
 
         }
-        console.log(`"${this.name}" is visited by: ${kidNameList}`);
+        console.log(`"${this.name}" is visited by: ${kidNameList}.`);
     }
+    removeKid(kidsName) {
 
+        let updatedKidList = [];
+        for (let i = 0; i < this.kidList.length; i++) {
+            if (kidsName !== this.kidList[i]) {
+                updatedKidList.push(this.kidList[i])
+            }
+        }
+        this.kidList = updatedKidList;
+        console.log(`${kidsName} has left "${this.name}" kindergarden.`);
+
+    }
 
 }
 
